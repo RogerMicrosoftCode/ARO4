@@ -5,16 +5,17 @@ export RESOURCEGROUP="arogbbwestus3"
 export CLUSTER="aroclusterwestus3"
 export SP_CLIENT_ID=""
 export SP_CLIENT_SECRET=""
+export VISIBILITY="Public"
 az group create --name arogbbwestus3 --location westus3
 az network vnet create --resource-group arogbbwestus3 --name aro-vnet --address-prefixes 192.168.192.0/23
 az network vnet subnet create --resource-group arogbbwestus3 --vnet-name aro-vnet --name master-subnet --address-prefixes 192.168.192.0/25 --service-endpoints Microsoft.ContainerRegistry
 az network vnet subnet create --resource-group arogbbwestus3 --vnet-name aro-vnet --name worker-subnet --address-prefixes 192.168.192.128/25 --service-endpoints Microsoft.ContainerRegistry
-az network vnet subnet update --name master-subnet --resource-group arogbbwestus3 --vnet-name aro-vnet --disable-private-link-service-network-policies true
+az network vnet subnet update --name master-subnet --resource-group arogbbwestus3 --vnet-name aro-vnet --private-link-service-network-policies Disabled
 
 az ad sp create-for-rbac -n arobuildgbbc --role contriburor --scopes /subscriptions/55318ed6-5d8a-4bd2-889f-10e502960c28/resourceGroups/arogbbwestus3 --skip-assignment
 az ad sp list --show-mine -o table
-az aro create --resource-group arogbbwestus3 --name arolatamgbb --vnet aro-vnet --master-subnet master-subnet --worker-subnet worker-subnet --apiserver-visibility Private --ingress-visibility Private --domain arolatamgbb.jaropro.net --pull-secret @pull-secret.txt
-az aro create --resource-group arogbbwestus3 --name arolatamgbb --vnet aro-vnet --master-subnet master-subnet --worker-subnet worker-subnet --apiserver-visibility Private --ingress-visibility Private --domain arolatamgbb.jaropro.net --pull-secret @pull-secret.txt --client-id $SP_CLIENT_ID --client-secret $SP_CLIENT_SECRET
+#az aro create --resource-group arogbbwestus3 --name arolatamgbb --vnet aro-vnet --master-subnet master-subnet --worker-subnet worker-subnet --apiserver-visibility Private --ingress-visibility Private --domain arolatamgbb.jaropro.net --pull-secret @pull-secret.txt
+az aro create --resource-group arogbbwestus3 --name arolatamgbb --vnet aro-vnet --master-subnet master-subnet --worker-subnet worker-subnet --apiserver-visibility $VISIBILITY --ingress-visibility $VISIBILITY --domain jaropro.net --pull-secret @pull-secret.txt --client-id $SP_CLIENT_ID --client-secret $SP_CLIENT_SECRET
 
 az aro delete --name $CLUSTER --resource-group $RESOURCEGROUP --yes --no-wait
 az network vnet subnet delete --name master-subnet --resource-group $RESOURCEGROUP --vnet-name aro-vnet
