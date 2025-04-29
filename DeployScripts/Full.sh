@@ -8,9 +8,9 @@ export SP_CLIENT_SECRET=""
 export VISIBILITY="Public"
 az group create --name $RESOURCEGROUP --location $LOCATION
 az network vnet create --resource-group $RESOURCEGROUP --name aro-vnet --address-prefixes 192.168.192.0/23
-az network vnet subnet create --resource-group $RESOURCEGROUP--vnet-name aro-vnet --name master-subnet --address-prefixes 192.168.192.0/25 --service-endpoints Microsoft.ContainerRegistry
-az network vnet subnet create --resource-group $RESOURCEGROUP--vnet-name aro-vnet --name worker-subnet --address-prefixes 192.168.192.128/25 --service-endpoints Microsoft.ContainerRegistry
-az network vnet subnet update --name master-subnet --resource-group $RESOURCEGROUP--vnet-name aro-vnet --private-link-service-network-policies Disabled
+az network vnet subnet create --resource-group $RESOURCEGROUP --vnet-name aro-vnet --name master-subnet --address-prefixes 192.168.192.0/25 --service-endpoints Microsoft.ContainerRegistry
+az network vnet subnet create --resource-group $RESOURCEGROUP --vnet-name aro-vnet --name worker-subnet --address-prefixes 192.168.192.128/25 --service-endpoints Microsoft.ContainerRegistry
+az network vnet subnet update --name master-subnet --resource-group $RESOURCEGROUP --vnet-name aro-vnet --private-link-service-network-policies Disabled
 
 #az ad sp create-for-rbac -n arobuildgbbc --role contriburor --scopes /subscriptions/55318ed6-5d8a-4bd2-889f-10e502960c28/resourceGroups/$RESOURCEGROUP--skip-assignment
 #az ad sp list --show-mine -o table
