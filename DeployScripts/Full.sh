@@ -28,5 +28,5 @@ az aro create --resource-group $RESOURCEGROUP --name $CLUSTER --vnet aro-vnet --
 #az group delete --name $RESOURCEGROUP --yes --no-wait
 
 #SECCION PARA VERIFICAR EL TIPO DE VM
-#az vm list-skus --location westus3 --size Standard_D --all --output table | grep '1,2,3    None' >vmlist.txt
+#az vm list-skus --location $LOCATION --size Standard_D --all --output table | grep '1,2,3    None' >vmlist.txt
 #cat vmlist.txt |grep D8
