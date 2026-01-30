@@ -1,0 +1,26 @@
+# Imágenes a replicar al ACR
+# Formato: imagen:tag (una por línea)
+# Líneas que comienzan con # son comentarios
+#
+# Ejemplos de Docker Hub (library namespace):
+nginx:latest
+nginx:1.25-alpine
+nginx:1.24
+
+redis:7-alpine
+redis:7.2
+redis:latest
+
+postgres:16-alpine
+postgres:15
+postgres:14
+
+# Ejemplos con namespace específico:
+# bitnami/nginx:latest
+# bitnami/redis:latest
+
+# Ejemplos de GHCR:
+# ghcr.io/org/image:tag
+
+# Ejemplos de Quay:
+# quay.io/org/image:tag
